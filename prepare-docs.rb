@@ -26,7 +26,12 @@ else
     FileUtils.rm_rf(".vuepress/openhab-docs")
 
     puts ">>> Cloning openhab-docs"
-    `git clone --depth 1 #{$version ? "--branch #{$version}" : ""} https://github.com/openhab/openhab-docs .vuepress/openhab-docs`
+    if ($version == '2.3.0') then
+        `git clone --depth 50 https://github.com/openhab/openhab-docs .vuepress/openhab-docs`
+        `git checkout b8cbb4`
+    else
+        `git clone --depth 1 #{$version ? "--branch #{$version}" : ""} https://github.com/openhab/openhab-docs .vuepress/openhab-docs`
+    end
 end
 
 $esh_features = []
